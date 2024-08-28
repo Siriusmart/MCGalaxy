@@ -23,7 +23,7 @@ namespace MCGalaxy.Commands.Info
 {
     public sealed class CmdHelp : Command2 
     {
-        public override string name { get { return "Help"; } }
+        public override string name { get { return "MCGHelp"; } }
         public override string type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override CommandAlias[] Aliases {
@@ -56,8 +56,8 @@ namespace MCGalaxy.Commands.Info
             p.Message("  &T{0}", CmdCommands.GetCategories());
             p.Message("&HOther Categories:");
             p.Message("  &TRanks Colors Emotes Shortcuts Commands");
-            p.Message("&HTo view help for a category, type &T/Help CategoryName");
-            p.Message("&HTo see detailed help for a command, type &T/Help CommandName");
+            p.Message("&HTo view help for a category, type &T/MCGHelp CategoryName");
+            p.Message("&HTo see detailed help for a command, type &T/MCGHelp CommandName");
             p.Message("&HTo see your stats, type &T/Info");
             p.Message("&HTo see loaded maps, type &T/Maps");
             p.Message("&HTo view your personal world options, use &T/Realm");
