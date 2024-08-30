@@ -24,7 +24,7 @@ using BlockID = System.UInt16;
 namespace MCGalaxy.Commands.Building {
     public sealed class CmdFill : DrawCmd {
         public override string name { get { return "Fill"; } }
-        public override string shortcut { get { return "f"; } }
+        /* public override string shortcut { get { return "f"; } } */
         public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }       
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("F3D"), new CommandAlias("F2D", "2d"),

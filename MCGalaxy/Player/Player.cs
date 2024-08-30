@@ -302,9 +302,9 @@ namespace MCGalaxy {
             
             if (!isKick) {
                 string leaveMsg = "&c- λFULL &S" + chatMsg;
-                if (Server.Config.GuestLeavesNotify || Rank > LevelPermission.Guest) {
-                    Chat.MessageFrom(ChatScope.All, this, leaveMsg, null, Chat.FilterVisible(this), !hidden);
-                }
+                /* if (Server.Config.GuestLeavesNotify || Rank > LevelPermission.Guest) { */
+                /*     Chat.MessageFrom(ChatScope.All, this, leaveMsg, null, Chat.FilterVisible(this), !hidden); */
+                /* } */
                 Logger.Log(LogType.UserActivity, "{0} disconnected ({1}&S).", truename, chatMsg);
             } else {
                 string leaveMsg = "&c- λFULL &Skicked &S" + chatMsg;

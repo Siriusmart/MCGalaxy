@@ -18,7 +18,7 @@
 namespace MCGalaxy.Commands.Building {
     public sealed class CmdPaint : Command2 {
         public override string name { get { return "Paint"; } }
-        public override string shortcut { get { return "p"; } }
+        /* public override string shortcut { get { return "p"; } } */
         public override string type { get { return CommandTypes.Building; } }
         public override bool SuperUseable { get { return false; } }
 
