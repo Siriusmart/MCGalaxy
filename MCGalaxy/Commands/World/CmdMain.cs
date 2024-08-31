@@ -20,7 +20,7 @@ using MCGalaxy.Games;
 namespace MCGalaxy.Commands.World {
     public sealed class CmdMain : Command2 {      
         public override string name { get { return "Main"; } }
-        public override string shortcut { get { return "h"; } }
+        /* public override string shortcut { get { return "h"; } } */
         public override string type { get { return CommandTypes.World; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Admin, "can change the main level") }; }
