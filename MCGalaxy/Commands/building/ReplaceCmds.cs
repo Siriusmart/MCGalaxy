@@ -23,7 +23,7 @@ using MCGalaxy.Maths;
 namespace MCGalaxy.Commands.Building {
     public class CmdReplace : DrawCmd {
         public override string name { get { return "Replace"; } }
-        public override string shortcut { get { return "r"; } }
+        /* public override string shortcut { get { return "r"; } } */
         public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
         
         protected override DrawOp GetDrawOp(DrawArgs dArgs) { 
