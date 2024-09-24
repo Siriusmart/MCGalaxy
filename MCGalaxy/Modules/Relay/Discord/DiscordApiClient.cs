@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2015 MCGalaxy
+    Copyright 2015-2024 MCGalaxy
         
     Dual-licensed under the Educational Community License, Version 2.0 and
     the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -64,6 +64,7 @@ namespace MCGalaxy.Modules.Relay.Discord
                     
                     string data = Json.SerialiseObject(msg.ToJson());
                     HttpUtil.SetRequestData(req, Encoding.UTF8.GetBytes(data));
+                    msg.OnRequest(req);
                     res = req.GetResponse();
                     
                     string resp = HttpUtil.GetResponseText(res);

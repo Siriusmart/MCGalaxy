@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2015 MCGalaxy
+    Copyright 2015-2024 MCGalaxy
         
     Dual-licensed under the Educational Community License, Version 2.0 and
     the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Text;
 using MCGalaxy.Config;
 
@@ -40,6 +41,9 @@ namespace MCGalaxy.Modules.Relay.Discord
         /// <summary> Attempts to combine this message with a prior message to reduce API calls </summary>
         public virtual bool CombineWith(DiscordApiMessage prior) { return false; }
         
+
+        /// <summary> Optionally adjusts the request to send to Discord </summary>
+        public virtual void OnRequest(HttpWebRequest req) { }
         
         /// <summary> Processes the response received from Discord </summary>
         public virtual void ProcessResponse(string response) { }

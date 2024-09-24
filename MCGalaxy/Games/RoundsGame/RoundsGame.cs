@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2015 MCGalaxy
+    Copyright 2015-2024 MCGalaxy
         
     Dual-licensed under the Educational Community License, Version 2.0 and
     the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -84,6 +84,7 @@ namespace MCGalaxy.Games
             
             Thread thread;
             Server.StartThread(out thread, "Game_ " + GameName, RunGame);
+            thread.IsBackground = true;
         }
 
         /// <summary> Attempts to auto start this game with infinite rounds. </summary>
