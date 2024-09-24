@@ -27,8 +27,13 @@ namespace MCGalaxy.Bots {
         static ConfigElement[] elems;
         
         public static void Load(Level lvl) { lock (lvl.botsIOLock) { LoadCore(lvl); } }
+        public static void Load(Level lvl, string name) { lock (lvl.botsIOLock) { LoadCore(lvl, name); } }
         static void LoadCore(Level lvl) {
-            string path = Paths.BotsPath(lvl.MapName);
+            LoadCore(lvl, lvl.MapName);
+        }
+
+        public static void LoadCore(Level lvl, string name) {
+            string path = Paths.BotsPath(name);
             if (!File.Exists(path)) return;
             List<BotProperties> props = null;
             

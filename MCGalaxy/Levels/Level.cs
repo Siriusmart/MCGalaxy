@@ -302,21 +302,57 @@ namespace MCGalaxy
                 return null;
             }
         }
-        
-        public static void LoadMetadata(Level lvl) {
+
+        public static Level LoadWithPath(string name, string pathName) {
+            string path = LevelInfo.MapPath(pathName);
+            bool cancel = false;
+            OnLevelLoadEvent.Call(name, path, ref cancel);
+            if (cancel) return null;
+
+            if (!File.Exists(path)) {
+                Logger.Log(LogType.Warning, "Attempted to load level {0}, but {1} does not exist.", name, path);
+                return null;
+            }
+            
             try {
-                string propsPath = LevelInfo.PropsPath(lvl.MapName);
+                Level lvl = IMapImporter.Decode(path, name, true);
+                LoadMetadata(lvl, pathName);
+                BotsFile.Load(lvl, pathName);
+
+                object locker = ThreadSafeCache.DBCache.GetLocker(name);
+                lock (locker) {
+                    LevelDB.LoadZones(lvl, name);
+                    LevelDB.LoadPortals(lvl, name);
+                    LevelDB.LoadMessages(lvl, name);
+                }
+
+                Logger.Log(LogType.SystemActivity, "Level \"{0}\" loaded.", lvl.name);
+                OnLevelLoadedEvent.Call(lvl);
+                return lvl;
+            } catch (Exception ex) {
+                Logger.LogError("Error loading map from " + path, ex);
+                return null;
+            }
+        }
+
+        public static void LoadMetadata(Level lvl) {
+            LoadMetadata(lvl, lvl.MapName);
+        }
+        
+        public static void LoadMetadata(Level lvl, string name) {
+            try {
+                string propsPath = LevelInfo.PropsPath(name);
                 if (lvl.Config.Load(propsPath)) {
                     lvl.SetPhysics(lvl.Config.Physics);
                 } else {
-                    Logger.Log(LogType.ConsoleMessage, ".properties file for level {0} was not found.", lvl.MapName);
+                    Logger.Log(LogType.ConsoleMessage, ".properties file for level {0} was not found.", name);
                 }
             } catch (Exception e) {
                 Logger.LogError(e);
             }
             lvl.BlockDB.Cache.Enabled = lvl.Config.UseBlockDB;
             
-            string blockDefsPath   = Paths.MapBlockDefs(lvl.MapName);
+            string blockDefsPath   = Paths.MapBlockDefs(name);
             BlockDefinition[] defs = BlockDefinition.Load(blockDefsPath);
             for (int b = 0; b < defs.Length; b++) {
                 if (defs[b] == null) continue;
